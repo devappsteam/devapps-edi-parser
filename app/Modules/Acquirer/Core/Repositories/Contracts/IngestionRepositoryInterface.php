@@ -12,4 +12,9 @@ interface IngestionRepositoryInterface extends RepositoryInterface
      * Used for idempotency checks.
      */
     public function findByHash(string $acquirerCode, string $hash): ?Ingestion;
+
+    /**
+     * Find an ingestion by its UUID or throw ModelNotFoundException.
+     */
+    public function findByUuidOrFail(string $uuid): Ingestion;
 }

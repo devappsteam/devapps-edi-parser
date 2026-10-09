@@ -20,4 +20,9 @@ class IngestionRepository extends BaseRepository implements IngestionRepositoryI
             ->where('content_hash', $hash)
             ->first();
     }
+
+    public function findByUuidOrFail(string $uuid): Ingestion
+    {
+        return $this->model->newQuery()->where('uuid', $uuid)->firstOrFail();
+    }
 }

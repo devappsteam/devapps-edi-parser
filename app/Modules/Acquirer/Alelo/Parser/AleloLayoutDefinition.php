@@ -48,38 +48,38 @@ class AleloLayoutDefinition
         return [
             'tipo_registro' => [1, 2, 'numeric'],
             'chave_pagamento' => [3, 30, 'alpha'],
-            'data_pagamento_prevista' => [33, 8, 'date'],
-            'data_processamento' => [41, 8, 'date'],
-            'estabelecimento_matriz' => [49, 20, 'numeric'],
-            'estabelecimento' => [69, 20, 'numeric'],
-            'nsu_host' => [89, 10, 'numeric'],
-            'data_transacao' => [99, 8, 'date'],
-            'hora_transacao' => [107, 6, 'time'],
-            'tipo_movimento' => [113, 2, 'numeric'], // 01 a 05
-            'valor_bruto_sinal' => [115, 1, 'alpha'],
-            'valor_bruto' => [116, 15, 'decimal', 2], // Needs confirmation, assuming 2 decimals usually, layout says "up to 6"
-            'valor_taxa_sinal' => [131, 1, 'alpha'],
-            'valor_taxa' => [132, 15, 'decimal', 2],
+            'estabelecimento_matriz' => [33, 15, 'numeric'],
+            'estabelecimento' => [48, 15, 'numeric'],
+            'cnpj_raiz' => [63, 8, 'numeric'],
+            'tipo_movimento' => [71, 3, 'numeric'],
+            'origem_ajuste' => [74, 6, 'numeric'],
+            'id_compensacao' => [80, 15, 'alpha'],
+            'data_processamento' => [95, 8, 'date'],
+            'data_pagamento_prevista' => [103, 8, 'date'], // Data prevista de processamento
+            'data_transacao' => [111, 8, 'date'],
+            'hora_transacao' => [119, 6, 'time'], // Hora de captura
+            'data_envio_banco' => [125, 8, 'date'], // Data prevista de pagamento
+            'valor_bruto_sinal' => [133, 1, 'alpha'],
+            'valor_bruto' => [134, 13, 'decimal', 2],
             'valor_liquido_sinal' => [147, 1, 'alpha'],
-            'valor_liquido' => [148, 15, 'decimal', 2],
-            'codigo_autorizacao' => [163, 10, 'alpha'],
-            'numero_cartao' => [173, 19, 'numeric'],
-            'tipo_captura' => [192, 2, 'numeric'], // 01 ou 02
-            'taxa_adm' => [194, 9, 'decimal', 6],  // manual notes "até 6 casas"
-            'tipo_produto' => [203, 3, 'numeric'],
-            'uso_alelo_1' => [206, 5, 'numeric'],
-            'valor_tarifa_sinal' => [211, 1, 'alpha'],
-            'valor_tarifa' => [212, 15, 'decimal', 2],
-            'forma_captura' => [227, 2, 'numeric'], // 00 a 05
-            'modo_entrada_cartao' => [229, 2, 'numeric'],
-            'codigo_ajuste' => [231, 2, 'numeric'],
-            'uso_alelo_2' => [233, 25, 'alpha'],
-            'id_transacao' => [258, 20, 'alpha'],
-            'psr' => [278, 11, 'numeric'],
-            'chave_ajuste' => [289, 30, 'alpha'],
-            'uso_alelo_3' => [319, 11, 'alpha'],
-            'nsu_doc_referencia' => [330, 10, 'numeric'],
-            'uso_alelo_4' => [340, 161, 'alpha'],
+            'valor_liquido' => [148, 13, 'decimal', 2],
+            'valor_taxa_sinal' => [161, 1, 'alpha'],
+            'valor_taxa' => [162, 13, 'decimal', 2],
+            'taxa_adm' => [175, 13, 'decimal', 6],
+            'valor_tarifa' => [188, 13, 'decimal', 2],
+            'tipo_produto' => [201, 4, 'numeric'],
+            'tipo_captura' => [205, 2, 'numeric'],
+            'meio_captura' => [207, 2, 'numeric'],
+            'bandeira' => [209, 3, 'numeric'],
+            'modo_entrada_cartao' => [212, 3, 'numeric'],
+            'numero_cartao' => [215, 19, 'numeric'],
+            'codigo_autorizacao' => [242, 8, 'alpha'],
+            'nsu_host' => [250, 6, 'numeric'], // NSU/DOC
+            'codigo_banco' => [256, 4, 'numeric'],
+            'agencia' => [260, 5, 'alpha'],
+            'conta' => [265, 14, 'alpha'],
+            'id_transacao' => [279, 18, 'alpha'], // Identificador unico
+            'psr' => [297, 3, 'numeric'],
         ];
     }
 
@@ -87,55 +87,38 @@ class AleloLayoutDefinition
     {
         return [
             'tipo_registro' => [1, 2, 'numeric'],
-            'chave_pagamento' => [3, 30, 'alpha'],
-            'data_pagamento_prevista' => [33, 8, 'date'],
-            'data_processamento' => [41, 8, 'date'],
-            'estabelecimento_matriz' => [49, 20, 'numeric'],
-            'estabelecimento' => [69, 20, 'numeric'],
-            'cnpj_raiz' => [89, 14, 'numeric'],
-            'tipo_produto' => [103, 3, 'numeric'],
-            'valor_bruto_sinal' => [106, 1, 'alpha'],
-            'valor_bruto' => [107, 15, 'decimal', 2],
-            'valor_taxa_sinal' => [122, 1, 'alpha'],
-            'valor_taxa' => [123, 15, 'decimal', 2],
-            'valor_liquido_sinal' => [138, 1, 'alpha'],
-            'valor_liquido' => [139, 15, 'decimal', 2],
-            'status_pagamento' => [154, 2, 'numeric'], // 01,03,04,05
-            'codigo_banco' => [156, 4, 'numeric'], // Assuming 4 digits + 1 check usually, layout says 4 + DV? Wait, 156-159 is 4 digits. Let's use 5 total. Actually: 156-160? Manual says check it. Will parse raw as string.
-            'agencia' => [161, 6, 'alpha'],
-            'conta' => [167, 12, 'alpha'],
-            'motivo_rejeicao' => [179, 3, 'numeric'],
-            'data_envio_banco' => [182, 8, 'date'],
-            'uso_alelo_1' => [190, 5, 'numeric'],
-            'valor_tarifa_sinal' => [195, 1, 'alpha'],
-            'valor_tarifa' => [196, 15, 'decimal', 2],
-            'uso_alelo_2' => [211, 290, 'alpha'],
+            'estabelecimento' => [3, 15, 'numeric'],
+            'cnpj_raiz' => [18, 8, 'numeric'],
+            'estabelecimento_matriz' => [26, 15, 'numeric'],
+            'chave_pagamento' => [41, 30, 'alpha'],
+            'status_pagamento' => [72, 3, 'numeric'],
+            'motivo_rejeicao' => [75, 5, 'numeric'],
+            'data_envio_banco' => [97, 8, 'date'],
+            'valor_liquido_sinal' => [105, 1, 'alpha'], // Mapping payment amount to net_amount
+            'valor_liquido' => [106, 18, 'decimal', 2],
+            'codigo_banco' => [170, 4, 'numeric'],
+            'agencia' => [174, 5, 'alpha'],
+            'conta' => [179, 14, 'alpha'],
+            'id_transacao' => [217, 12, 'alpha'],
         ];
     }
-    
-    // ... [Simplificando a adição dos outros registros para o prompt atual. 
-    // Em produção os outros (03, 05, 06) seguem exatamente a mesma lógica posicional.]
     
     protected static function pagamentoMultibeneficios(): array
     {
         return [
             'tipo_registro' => [1, 2, 'numeric'],
             'chave_pagamento' => [3, 30, 'alpha'],
-            'data_pagamento_prevista' => [33, 8, 'date'],
-            'data_processamento' => [41, 8, 'date'],
-            'estabelecimento_matriz' => [49, 20, 'numeric'],
-            'estabelecimento' => [69, 20, 'numeric'],
-            'cnpj_raiz' => [89, 14, 'numeric'],
-            'codigo_banco' => [103, 4, 'numeric'],
-            'agencia' => [107, 6, 'alpha'],
-            'conta' => [113, 12, 'alpha'],
-            'status_pagamento' => [125, 2, 'numeric'],
-            'motivo_rejeicao' => [127, 3, 'numeric'],
-            'data_envio_banco' => [130, 8, 'date'],
-            'id_transacao' => [138, 20, 'alpha'],
-            'valor_liquido_sinal' => [158, 1, 'alpha'],
-            'valor_liquido' => [159, 15, 'decimal', 2],
-            'uso_alelo_1' => [174, 327, 'alpha'],
+            'estabelecimento' => [63, 15, 'numeric'],
+            'cnpj_raiz' => [78, 8, 'numeric'],
+            'status_pagamento' => [88, 3, 'numeric'],
+            'motivo_rejeicao' => [91, 5, 'numeric'],
+            'data_envio_banco' => [96, 8, 'date'], // Data de pagamento
+            'valor_liquido_sinal' => [104, 1, 'alpha'],
+            'valor_liquido' => [105, 18, 'decimal', 2],
+            'codigo_banco' => [223, 4, 'numeric'],
+            'agencia' => [227, 5, 'alpha'],
+            'conta' => [232, 14, 'alpha'],
+            'id_transacao' => [246, 12, 'alpha'],
         ];
     }
 
@@ -143,19 +126,17 @@ class AleloLayoutDefinition
     {
         return [
             'tipo_registro' => [1, 2, 'numeric'],
-            'estabelecimento_matriz' => [3, 20, 'numeric'],
-            'estabelecimento' => [23, 20, 'numeric'],
-            'cnpj_raiz' => [43, 14, 'numeric'],
-            'data_processamento' => [57, 8, 'date'],
-            'valor_inicial_sinal' => [65, 1, 'alpha'],
-            'valor_inicial' => [66, 15, 'decimal', 2],
-            'valor_abatido_sinal' => [81, 1, 'alpha'],
-            'valor_abatido' => [82, 15, 'decimal', 2],
-            'valor_final_sinal' => [97, 1, 'alpha'],
-            'valor_final' => [98, 15, 'decimal', 2],
-            'chave_pagamento_abatido' => [113, 30, 'alpha'],
-            'chave_pagamento_saldo' => [143, 30, 'alpha'],
-            'uso_alelo_1' => [173, 328, 'alpha'],
+            'estabelecimento' => [48, 15, 'numeric'],
+            'cnpj_raiz' => [63, 8, 'numeric'],
+            'tipo_movimento' => [71, 3, 'numeric'],
+            'data_processamento' => [95, 8, 'date'],
+            'valor_inicial_sinal' => [133, 1, 'alpha'], // Saldo dia atual
+            'valor_inicial' => [134, 13, 'decimal', 2],
+            'valor_abatido_sinal' => [147, 1, 'alpha'], // Abatimento dia atual
+            'valor_abatido' => [148, 13, 'decimal', 2],
+            'valor_final_sinal' => [161, 1, 'alpha'], // Saldo anterior
+            'valor_final' => [162, 13, 'decimal', 2],
+            'tipo_produto' => [201, 4, 'numeric'],
         ];
     }
 
@@ -163,24 +144,16 @@ class AleloLayoutDefinition
     {
         return [
             'tipo_registro' => [1, 2, 'numeric'],
-            'chave_pagamento' => [3, 30, 'alpha'],
-            'data_pagamento_prevista' => [33, 8, 'date'],
-            'data_processamento' => [41, 8, 'date'],
-            'estabelecimento_matriz' => [49, 20, 'numeric'],
-            'estabelecimento' => [69, 20, 'numeric'],
-            'cnpj_raiz' => [89, 14, 'numeric'],
-            'valor_bruto_sinal' => [103, 1, 'alpha'],
-            'valor_bruto' => [104, 15, 'decimal', 2],
-            'valor_taxa_sinal' => [119, 1, 'alpha'],
-            'valor_taxa' => [120, 15, 'decimal', 2],
-            'valor_liquido_sinal' => [135, 1, 'alpha'],
-            'valor_liquido' => [136, 15, 'decimal', 2],
-            'status_pagamento' => [151, 2, 'numeric'],
-            'codigo_banco' => [153, 4, 'numeric'],
-            'agencia' => [157, 6, 'alpha'],
-            'conta' => [163, 12, 'alpha'],
-            'motivo_rejeicao' => [175, 3, 'numeric'],
-            'uso_alelo_1' => [178, 323, 'alpha'],
+            'cnpj_raiz' => [18, 8, 'numeric'],
+            'status_pagamento' => [72, 3, 'numeric'],
+            'motivo_rejeicao' => [75, 5, 'numeric'],
+            'data_envio_banco' => [97, 8, 'date'],
+            'valor_liquido_sinal' => [105, 1, 'alpha'],
+            'valor_liquido' => [106, 18, 'decimal', 2],
+            'codigo_banco' => [170, 4, 'numeric'],
+            'agencia' => [174, 5, 'alpha'],
+            'conta' => [179, 14, 'alpha'],
+            'id_transacao' => [217, 12, 'alpha'],
         ];
     }
 
